@@ -41,7 +41,7 @@
     }
     .counter {
       font-size: 1.1rem;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       font-weight: bold;
     }
     .message {
@@ -50,10 +50,16 @@
       border-radius: 16px;
       line-height: 1.8;
       font-size: 1.05rem;
+      margin-bottom: 30px;
     }
     footer {
       margin-top: 40px;
       font-size: 0.9rem;
+    }
+    .baby-title {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      color: #ffeb3b;
     }
   </style>
 </head>
@@ -83,14 +89,17 @@
       </p>
     </div>
 
+    <h2 class="baby-title">👶 আমাদের নতুন অতিথি</h2>
+    <div class="counter" id="babyCounter">লোড হচ্ছে...</div>
+
     <footer>
       © Shohel & Sharmin | Made with ❤
     </footer>
   </div>
 
   <script>
+    // বিয়ের দিন থেকে কাউন্ট
     const weddingDate = new Date('2025-05-03T00:00:00');
-
     function updateCounter() {
       const now = new Date();
       let diff = now - weddingDate;
@@ -114,6 +123,32 @@
 
     setInterval(updateCounter, 1000);
     updateCounter();
+
+    // প্রেগনেন্সি কাউন্ট (১৪ মার্চ থেকে)
+    const babyDate = new Date('2025-03-14T00:00:00');
+    function updateBabyCounter() {
+      const now = new Date();
+      let diff = now - babyDate;
+
+      if (diff < 0) {
+        document.getElementById('babyCounter').innerText = 'অপেক্ষা চলছে ❤';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff %= (1000 * 60 * 60 * 24);
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff %= (1000 * 60 * 60);
+      const minutes = Math.floor(diff / (1000 * 60));
+      diff %= (1000 * 60);
+      const seconds = Math.floor(diff / 1000);
+
+      document.getElementById('babyCounter').innerText =
+        `আমাদের নতুন অতিথির অপেক্ষায় ${days} দিন ${hours} ঘণ্টা ${minutes} মিনিট ${seconds} সেকেন্ড`;
+    }
+
+    setInterval(updateBabyCounter, 1000);
+    updateBabyCounter();
   </script>
 </body>
 </html>
